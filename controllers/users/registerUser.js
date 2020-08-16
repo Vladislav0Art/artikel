@@ -50,19 +50,19 @@ const registerUser = (req, res) => {
   
   // checking empty fields
   if(!email || !name || !password || !passwordCopy) {
-    return res.status(400).json({ error: new Error('Each field must be filled') });
+    return res.status(400).json({ message: 'Each field must be filled' });
   }
 
   // checking passwords
   if(password !== passwordCopy) {
-    return res.status(400).json({ error: new Error('Passwords are not the same') });
+    return res.status(400).json({ message: 'Passwords are not the same' });
   }
 
   // checking if user with the email exists
   findUserWithEmail(email)
     .then((result) => {
       if(result) {
-        return res.status(400).json({ error: new Error('Email is already taken. Try another one') });
+        return res.status(400).json({ message: 'Email is already taken. Try another one' });
       }
 
       // generating hashed password
@@ -79,13 +79,13 @@ const registerUser = (req, res) => {
           // saving user instance
           newUser.save()
             .then(() => res.status(200).json({ message: 'Successfully registered' }))
-            .catch(err => res.status(400).json({ error: err }));
+            .catch(err => res.status(400).json({ message: err.message }));
 
         })
-        .catch(err => res.status(400).json({ error: err }));
+        .catch(err => res.status(400).json({ message: err.message }));
 
     })
-    .catch(err => res.status(400).json({ error: err }));
+    .catch(err => res.status(400).json({ message: err.message }));
 
 };
 

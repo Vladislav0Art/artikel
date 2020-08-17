@@ -1,0 +1,19 @@
+@media all and (max-width: 768px) {
+  .register {
+    form {
+      padding: 15px 20px;
+    }
+  }
+}
+
+@media all and (max-width: 576px) {
+  .register {
+    height: 100%;
+
+    form {
+      margin-top: 30px;
+      padding: 0;
+      box-shadow: none;
+    }
+  }
+}

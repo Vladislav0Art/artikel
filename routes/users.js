@@ -4,6 +4,7 @@ const passport = require('passport');
 const registerUser = require('../controllers/users/registerUser');
 const loginUser = require('../controllers/users/loginUser');
 const logoutUser = require('../controllers/users/logoutUser');
+const getUser = require('../controllers/users/getUser');
 // middlewares
 const ensureAuthenticated = require('../config/auth');
 
@@ -30,6 +31,12 @@ router.post('/login', passport.authenticate('local'), loginUser);
 // @access  Private
 router.get('/logout', ensureAuthenticated, logoutUser);
 
+
+
+// @route   GET users/get-user
+// @descr   get user
+// @access  Private
+router.get('/get-user', ensureAuthenticated, getUser);
 
 
 module.exports = router;

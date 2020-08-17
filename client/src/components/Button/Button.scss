@@ -1,0 +1,19 @@
+@import '../../styles/colors.scss';
+
+.button {
+  background: white;
+  border-radius: 6px;
+  border: 1px solid $elem-border-color;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 300;
+  padding: 8px 28px;
+  transition: 0.2s;
+
+  &:hover, &:focus {
+    color: white;
+    background: $action-color;
+    border-color: $action-color;
+  }
+}

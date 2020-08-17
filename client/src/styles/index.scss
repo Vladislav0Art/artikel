@@ -1,5 +1,6 @@
-@import './colors.scss';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import './colors.scss';
 
 * {
   margin: 0;
@@ -39,4 +40,35 @@ body {
   box-sizing: border-box;
   padding: 0 15px;
   margin: 0 auto;
+}
+
+
+.form {
+    display: grid;
+    justify-items: center;
+    gap: 30px;
+
+  &__title {
+    font-weight: 700;
+    text-align: center;
+    font-family: 'Montserrat', 'sans-serif';
+  }
+
+  &__content {
+    display: grid;
+    gap: 25px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: flex-start;
+
+    span {
+      margin-right: 8px;
+      font-family: 'Montserrat';
+      font-weight: 300;
+      font-size: 14px;
+      color: $text-color;
+    }
+  }
 }

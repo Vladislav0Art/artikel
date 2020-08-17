@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ClassNames from 'classnames';
+import classNames from 'classnames';
+// styles
+import './List.scss';
 
 
 const List = (props) => {
   return (
-    <ul className={ClassNames(props.classNames)}>
+    <ul className={classNames(props.classNames)}>
       <li className="active">
         <div>
           <span>item</span>

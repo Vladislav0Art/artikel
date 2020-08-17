@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // components
 import { List } from '../../components';
-
+// styles
+import './Sidebar.scss';
 
 
 const Sidebar = (props) => {
@@ -19,6 +20,7 @@ const Sidebar = (props) => {
     </div>
   );
 };
+
 
 Sidebar.propTypes = {
   title: PropTypes.string.isRequired

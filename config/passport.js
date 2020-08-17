@@ -57,9 +57,10 @@ const passportAuthentication = (passport) => {
   });
 
   passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => {
-      done(err, user);
-    });
+    User.findById(id)
+      .exec((err, user) => {
+        done(err, user);
+      });
   });
 };
 

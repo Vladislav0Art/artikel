@@ -1,0 +1,15 @@
+@import '../../styles/colors.scss';
+
+.login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    box-sizing: border-box;
+    padding: 60px 40px;
+    box-shadow: 0 0 2px 0 $elem-border-color;
+    border-radius: 8px;
+  }
+}

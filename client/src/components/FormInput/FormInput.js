@@ -12,14 +12,14 @@ const FormInput = ({
   placeholder,
   onChange,
   classNames,
+  blockClassNames,
   value,
-  children,
   label,
   ...props
 }) => {
   
   return (
-    <div className="inputBlock">
+    <div className={ClassNames("inputBlock", blockClassNames)}>
       <label className="inputBlock__label" htmlFor={name}>{label}</label>
       <input
         name={name}
@@ -43,6 +43,7 @@ FormInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['text', 'number', 'password', 'email']),
   classNames: PropTypes.array,
+  blockClassNames: PropTypes.array,
   value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string

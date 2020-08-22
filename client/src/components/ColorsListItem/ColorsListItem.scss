@@ -1,0 +1,40 @@
+@import '../../styles/colors.scss';
+
+
+.colorsListItem {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+
+  &-active {
+    border: solid 2px $text-color;
+    border-style: outset;
+  }
+
+  &-brightGray {
+    background: $icon-bright-gray;
+  }
+  &-darkGray {
+    background: $icon-dark-gray;
+  }
+  &-brightGreen {
+    background: $icon-bright-green;
+  }
+  &-darkGreen {
+    background: $icon-dark-green;
+  }
+  &-blue {
+    background: $icon-blue;
+  }
+  &-pink {
+    background: $icon-pink;
+  }
+  &-purple {
+    background: $icon-purple;
+  }
+  &-coral {
+    background: $icon-coral;
+  }
+}

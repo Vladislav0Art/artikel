@@ -1,6 +1,5 @@
 const passport = require('passport');
 
-
 // log out user
 const logoutUser = (req, res) => {
   req.logout();

@@ -8,23 +8,27 @@ import './List.scss';
 
 
 const List = (props) => {
+  console.log(props.items)
   return (
-    <ul className={classNames(props.classNames)}>
+    <ul className={classNames('list', props.classNames)}>
+      
       {
-        props.items.map((item) => (
-          <ListItem
-            
-            key={item._id}
-            id={item._id}
-            active={item.active}
-            iconColor={item.iconColor}
-            deleteItem={props.deleteItem}
-            makeItemActive={props.makeItemActive}
-            makeItemUnactive={props.makeItemUnactive}
+        props.items.length ?
+          props.items.map((item) => (
+            <ListItem
+              
+              key={item._id}
+              id={item._id}
+              active={item.active}
+              iconColor={item.iconColor}
+              deleteItem={props.deleteItem}
 
-          >{ item.title }</ListItem>
-        ))
+            >{ item.title }</ListItem>
+          ))
+        :
+          <p className="list__parag">No categories were found</p>
       }
+      
     </ul>
   );
 };
@@ -33,8 +37,7 @@ const List = (props) => {
 List.propTypes = {
   classNames: PropTypes.array,
   items: PropTypes.array.isRequired,
-  deleteItem: PropTypes.func.isRequired,
-  makeItemActive: PropTypes.func.isRequired
+  deleteItem: PropTypes.func.isRequired
 };
 
 

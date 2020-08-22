@@ -1,0 +1,33 @@
+@import '../../styles/colors.scss';
+
+.panel {
+  background: white;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  min-width: 235px;
+
+  &__content {
+    position: relative;
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  &__close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: $text-color;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    i {
+      color: white;
+    }
+  }
+}

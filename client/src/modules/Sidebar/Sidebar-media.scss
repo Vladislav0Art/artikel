@@ -1,0 +1,41 @@
+@media all and (max-width: 992px) {
+  .articles {
+    position: relative;
+    display: block;
+
+    &__content {
+      padding: 0 15px;
+      box-sizing: border-box;
+      max-width: none;
+    }
+
+    &__sidebar {
+      position: absolute;
+      transition: 1s;
+      width: 300px;
+      top: 0;
+      height: 100%;
+      left: -300px;
+
+      &-open {
+        left: 0;
+      }
+    }
+
+    &__openerBlock {    
+      display: flex;
+      padding-top: 10px;
+      padding-right: 10px;
+      box-sizing: border-box;
+      justify-content: flex-end;
+    }
+  }
+}
+
+@media all and (max-width: 576px) {
+  // .articles {
+  //   &__opener {
+  //     font-size: 10px;
+  //   }
+  // }
+}

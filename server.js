@@ -8,6 +8,7 @@ const errorLogger = require('./config/logger');
 require('./config/passport')(passport);
 // routes
 const users = require('./routes/users');
+const categories = require('./routes/categories');
 
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(passport.session());
 
 // including routes
 app.use('/users', users);
+app.use('/categories', categories);
 
 
 

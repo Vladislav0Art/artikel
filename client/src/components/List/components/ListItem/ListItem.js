@@ -19,7 +19,7 @@ const ListItem = ({
       <div className="listItem__content">
         
         <div className="listItem__left">
-          <i className={`listItem__icon listItem__icon-${iconColor ? iconColor : 'darkGray'}`}></i>
+          <i className={`listItem__icon listItem__icon-${iconColor}`}></i>
           <span className="listItem__text">{ children }</span>
         </div>
         

@@ -8,7 +8,6 @@ import './List.scss';
 
 
 const List = (props) => {
-  console.log(props.items)
   return (
     <ul className={classNames('list', props.classNames)}>
       

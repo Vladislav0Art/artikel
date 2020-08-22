@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 // components
 import { List, Button, Panel, ColorsList, FormInput } from '../../components';
 // api
-import { getUserCategories } from '../../api/categories';
+import { getUserCategories, postNewCategory, deleteCategory } from '../../api/categories';
 // styles
 import './Sidebar.scss';
 import './Sidebar-media.scss';
@@ -28,7 +28,7 @@ const Sidebar = (props) => {
   ]);
 
   const [newCategory, setNewCategory] = React.useState({
-    iconColor: null,
+    iconColor: 'darkGray',
     title: ''
   });
 
@@ -64,14 +64,6 @@ const Sidebar = (props) => {
   // ------------- logs ------------- //
 
 
-  // deleting item from state
-  const deleteItem = (id) => {
-    setItems((prevItems) => (
-      prevItems.filter(item => item._id !== id)
-    ));
-  };
-
-
   // opening panel for creating new categories
   const openPanel = () => {
     setPanelOpen(true);
@@ -105,6 +97,7 @@ const Sidebar = (props) => {
   // changing the title of a new category
   const setTitle = (event) => {
     event.persist();
+
     setNewCategory({
       ...newCategory,
       title: event.target.value
@@ -116,23 +109,47 @@ const Sidebar = (props) => {
   const createNewCategory = () => {
     // if title is not an empty string
     if(newCategory.title !== '') {
-      setItems((prevItems) => [...prevItems, { ...newCategory, active: false, _id: uuidv4() }]);
-      
-      setNewCategory({
-        title: '',
-        iconColor: null
-      });
+      postNewCategory(newCategory)
+        .then(response => {
+          const item = response.data.item;
+          // update state cats
+          setItems((prevItems) => [...prevItems, { ...item, active: false }]);
+          
+          // set state cat to default values
+          setNewCategory({
+            title: '',
+            iconColor: 'darkGray'
+          });
+          
+          // setting each color in state to non-active mode
+          setColors((prevColors) => prevColors.map(item => {
+            item.active = false;
+            return item;
+          }));
 
-      setColors((prevColors) => prevColors.map(item => {
-        item.active = false;
-        return item;
-      }));
+        })
+        .catch(err => console.log(err));
     }
     else {
       // notification
       alert('Category must have a title');
     }
   };
+
+
+  // deleting category
+  const deleteUserCategory = (id) => {
+    // deleting from db
+    deleteCategory(id)
+      .then(response => {
+        // deleting from state
+        setItems((prevItems) => (
+          prevItems.filter(item => item._id !== id)
+        ));
+      })
+      .catch(err => console.log(err));
+  };
+
 
 
   return (
@@ -145,7 +162,7 @@ const Sidebar = (props) => {
 
       <List 
         items={items}
-        deleteItem={deleteItem}
+        deleteItem={deleteUserCategory}
         classNames={['articles__list']} 
       />
 

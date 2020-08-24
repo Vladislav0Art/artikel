@@ -8,3 +8,4 @@ export { default as CustomLink } from './CustomLink/CustomLink';
 export { default as Panel } from './Panel/Panel';
 export { default as ColorsList } from './ColorsList/ColorsList';
 export { default as ColorsListItem } from './ColorsListItem/ColorsListItem';
+export { default as LinksList } from './LinksList/LinksList';

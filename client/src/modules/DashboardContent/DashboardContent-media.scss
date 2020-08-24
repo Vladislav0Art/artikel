@@ -1,0 +1,9 @@
+@media all and (max-width: 576px) {
+  .articles {
+    &__content {
+      &-title {
+        font-size: 24px;
+      }
+    }
+  }
+}

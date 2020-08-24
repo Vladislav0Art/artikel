@@ -21,6 +21,7 @@ const List = (props) => {
               active={item.active}
               iconColor={item.iconColor}
               deleteItem={props.deleteItem}
+              setItemToActive={props.setItemToActive}
 
             >{ item.title }</ListItem>
           ))
@@ -36,7 +37,8 @@ const List = (props) => {
 List.propTypes = {
   classNames: PropTypes.array,
   items: PropTypes.array.isRequired,
-  deleteItem: PropTypes.func.isRequired
+  deleteItem: PropTypes.func.isRequired,
+  setItemToActive: PropTypes.func.isRequired
 };
 
 

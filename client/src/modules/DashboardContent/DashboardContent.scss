@@ -1,0 +1,32 @@
+.articles {
+  &__content {
+    &-title {
+      font-family: 'Montserrat';
+      font-size: 30px;
+    }
+
+    &-linksList {
+      margin-top: 50px;
+    }
+
+    &-subtitle {
+      font-family: 'Montserrat';
+      font-size: 22px;
+    }
+
+    &-createBlock {
+      margin-top: 100px;
+    }
+
+    &-inputs {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    &-btnBlock {
+      margin-top: 30px;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@media all and (max-width: 992px) {
+  .articles {
+    height: auto;
+    position: relative;
+    display: block;
+
+    &__content {
+      padding: 60px 15px;
+      box-sizing: border-box;
+      max-width: none;
+    }
+
+    &__sidebar {
+      position: fixed;
+      transition: 1s;
+      width: 300px;
+      top: 0;
+      height: 100vh;
+      left: -300px;
+
+      &-open {
+        left: 0;
+      }
+    }
+
+    &__openerBlock {    
+      display: flex;
+      padding-top: 10px;
+      padding-right: 10px;
+      box-sizing: border-box;
+      justify-content: flex-end;
+    }
+
+    &__closeBtn {
+      display: block;
+    }
+  }
+}
+
+@media all and (max-width: 320px) {
+  .articles {
+    &__sidebar {
+      width: 100%;
+      height: 100%;
+      left: -320px;
+  
+      &-open {
+        left: 0;
+      }
+    }
+  }
+}

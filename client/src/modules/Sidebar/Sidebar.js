@@ -4,21 +4,19 @@ import ClassNames from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
 // components
 import { List, Button, Panel, ColorsList, FormInput } from '../../components';
-// api
-import { getUserCategories, postNewCategory, deleteCategory } from '../../api/categories';
 // styles
 import './Sidebar.scss';
 import './Sidebar-media.scss';
 
 
 const Sidebar = (props) => {
-  const [items, setItems] = React.useState([]);
+  const DEFAULT_COLOR = 'darkGray';
 
   const [panelOpen, setPanelOpen] = React.useState(false);
 
-  const [colors, setColors] = React.useState([
+  const [colors, setColors] = React.useState([ 
+    { id: uuidv4(), active: true, color: DEFAULT_COLOR },
     { id: uuidv4(), active: false, color: 'brightGray' }, 
-    { id: uuidv4(), active: false, color: 'darkGray' }, 
     { id: uuidv4(), active: false, color: 'brightGreen' }, 
     { id: uuidv4(), active: false, color: 'darkGreen' }, 
     { id: uuidv4(), active: false, color: 'blue' }, 
@@ -28,42 +26,11 @@ const Sidebar = (props) => {
   ]);
 
   const [newCategory, setNewCategory] = React.useState({
-    iconColor: 'darkGray',
+    iconColor: DEFAULT_COLOR,
     title: ''
   });
 
-  // componentDidMount hook
-  React.useEffect(() => {
-    // getting user's cats
-    getUserCategories()
-      .then(response => setItems(() => {
-        const items = response.data.items;
-        // setting to each cat active prop
-        items.forEach(item => {
-          item.active = false;
-        });
-
-        return items;
-      }))
-      .catch(err => console.log(err))
-  }, []);
-
-
-  // ------------- logs ------------- //
-  React.useEffect(() => {
-    console.log(items)
-  }, [items]);
-
-  React.useEffect(() => {
-    console.log(newCategory)
-  }, [newCategory]);
   
-  React.useEffect(() => {
-    console.log(colors)
-  }, [colors]);
-  // ------------- logs ------------- //
-
-
   // opening panel for creating new categories
   const openPanel = () => {
     setPanelOpen(true);
@@ -105,64 +72,43 @@ const Sidebar = (props) => {
   };
 
 
-  // creating new category 
   const createNewCategory = () => {
-    // if title is not an empty string
-    if(newCategory.title !== '') {
-      postNewCategory(newCategory)
-        .then(response => {
-          const item = response.data.item;
-          // update state cats
-          setItems((prevItems) => [...prevItems, { ...item, active: false }]);
-          
-          // set state cat to default values
-          setNewCategory({
-            title: '',
-            iconColor: 'darkGray'
-          });
-          
-          // setting each color in state to non-active mode
-          setColors((prevColors) => prevColors.map(item => {
-            item.active = false;
-            return item;
-          }));
+    props.createNewCategory(newCategory, () => {
 
-        })
-        .catch(err => console.log(err));
-    }
-    else {
-      // notification
-      alert('Category must have a title');
-    }
-  };
+      // set state cat to default values
+      setNewCategory({
+        title: '',
+        iconColor: DEFAULT_COLOR
+      });
+      
+      // setting each color in state to non-active mode unless it is the default color
+      setColors((prevColors) => prevColors.map(item => {
+        if(item.color === DEFAULT_COLOR) {
+          item.active = true;
+        }
+        else {
+          item.active = false;
+        }
 
+        return item;
+      }));
 
-  // deleting category
-  const deleteUserCategory = (id) => {
-    // deleting from db
-    deleteCategory(id)
-      .then(response => {
-        // deleting from state
-        setItems((prevItems) => (
-          prevItems.filter(item => item._id !== id)
-        ));
-      })
-      .catch(err => console.log(err));
-  };
+    });
+  }
 
-
-
+  
   return (
     <div className={ClassNames("articles__sidebar", props.classNames)}>
-
+      
       <h4 className="articles__title">
         <i className="fas fa-list-ul"></i>
         <span>{ props.title }</span>
       </h4>
 
       <List 
-        items={items}
-        deleteItem={deleteUserCategory}
+        items={props.items}
+        deleteItem={props.deleteUserCategory}
+        setItemToActive={props.setItemToActive}
         classNames={['articles__list']} 
       />
 
@@ -190,7 +136,7 @@ const Sidebar = (props) => {
               value={newCategory.title}
             />
 
-            <ColorsList 
+            <ColorsList
               colors={colors}
               setColor={setColor}
             />
@@ -207,6 +153,13 @@ const Sidebar = (props) => {
           null
       }
 
+      <Button
+        text="Close sidebar"
+        type="button"
+        classNames={['articles__closeBtn']}
+        onClick={props.closeSidebarPanel}
+      />
+
     </div>
   );
 };
@@ -214,7 +167,12 @@ const Sidebar = (props) => {
 
 Sidebar.propTypes = {
   title: PropTypes.string.isRequired,
-  classNames: PropTypes.array
+  classNames: PropTypes.array,
+  closeSidebarPanel: PropTypes.func.isRequired,
+  items: PropTypes.array.isRequired,
+  createNewCategory: PropTypes.func.isRequired,
+  deleteUserCategory: PropTypes.func.isRequired,
+  setItemToActive: PropTypes.func.isRequired
 };
 
 

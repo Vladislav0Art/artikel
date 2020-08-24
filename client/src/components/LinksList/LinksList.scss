@@ -1,0 +1,11 @@
+.linksList {
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  &__parag {
+    font-family: 'Montserrat';
+  }
+}

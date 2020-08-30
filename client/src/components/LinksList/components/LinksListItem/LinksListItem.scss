@@ -105,4 +105,45 @@
     }
   }
 
+  &__oginfo {
+    position: relative;
+    font-family: 'Montserrat';
+    max-width: 500px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: -15px;
+      left: 0;
+      background: $icon-bright-green;
+      width: 100%; 
+      height: 2px;
+    }
+  }
+
+  &__ogtitle {
+    font-family: inherit;
+    font-size: 14px;
+    color: $text-color;
+  }
+
+  &__ogdescr {
+    font-family: inherit;
+    font-size: 12px;
+    margin-top: 10px;
+    color: $icon-dark-gray;
+  }
+
+  &__ogimage {
+    max-height: 250px;
+    margin-top: 15px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
 }

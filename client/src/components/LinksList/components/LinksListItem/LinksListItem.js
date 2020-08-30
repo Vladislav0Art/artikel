@@ -13,6 +13,7 @@ const LinksListItem = ({
   descr,
   title,
   href,
+  ogInfo,
   isEditing,
   deleteLink,
   updateLink,
@@ -93,6 +94,22 @@ const LinksListItem = ({
                 <h5 className="linksListItem__title">{ link.title }</h5>
                 <p className="linksListItem__descr">{ link.descr !== '' ? link.descr : 'No description here' }</p>
                 <a href={link.href} target="_blank" rel="noopener noreferrer" className="linksListItem__link">Follow the link</a>
+                {
+                  ogInfo ?
+                    <div className="linksListItem__oginfo">
+                      {
+                        ogInfo.ogTitle ? <h4 className="linksListItem__ogtitle">{ ogInfo.ogTitle }</h4> : null
+                      }
+                      {
+                        ogInfo.ogDescription ? <p className="linksListItem__ogdescr">{ ogInfo.ogDescription }</p> : null
+                      }
+                      {
+                        ogInfo.ogImage ? <img src={ogInfo.ogImage.url} alt="Open Graph Image of the resource" className="linksListItem__ogimage"/> : null
+                      }
+                    </div>
+                  :
+                    null 
+                }
               </React.Fragment>
           }
         </div>
@@ -134,6 +151,7 @@ LinksListItem.propTypes = {
   descr: PropTypes.string,
   title: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
+  ogInfo: PropTypes.object,
   isEditing: PropTypes.bool.isRequired,
   deleteLink: PropTypes.func.isRequired,
   updateLink: PropTypes.func.isRequired,

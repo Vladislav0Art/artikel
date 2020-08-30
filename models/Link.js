@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { stringify } = require('uuid');
 const Schema = mongoose.Schema;
 
 const LinkSchema = new Schema({
@@ -17,6 +18,24 @@ const LinkSchema = new Schema({
   catId: {
     type: String,
     required: true,
+  },
+  ogInfo: {
+    type: Object,
+    ogTitle: {
+      type: String,
+      default: ''
+    },
+    ogDescription: {
+      type: String,
+      default: ''
+    },
+    ogImage: {
+      type: Object,
+      url: {
+        type: String,
+        default: ''
+      }
+    }
   }
 });
 

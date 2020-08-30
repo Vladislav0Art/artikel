@@ -28,6 +28,7 @@ const LinksList = ({
                 descr={link.descr}
                 title={link.title}
                 href={link.href}
+                ogInfo={link.ogInfo}
                 isEditing={link.isEditing}
                 deleteLink={deleteLink}
                 updateLink={updateLink}

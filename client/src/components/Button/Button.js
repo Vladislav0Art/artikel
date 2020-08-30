@@ -8,12 +8,14 @@ import './Button.scss';
 const Button = ({
   type,
   text,
+  children,
   onClick,
   classNames
 }) => {
   return (
     <button type={type} className={ClassNames('button', classNames)} onClick={onClick}>
       { text }
+      { children }
     </button>
   );
 };
@@ -26,7 +28,8 @@ Button.defaultProps = {
 Button.propTypes = {
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
   classNames: PropTypes.array,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  children: PropTypes.any,
   onClick: PropTypes.func
 };
 

@@ -86,6 +86,11 @@ const Dashboard = () => {
         setItems((prevItems) => (
           prevItems.filter(item => item._id !== id)
         ));
+
+        // if active category is the one that was deleted, then remove it from the state
+        if(activeItem._id === id) {
+          setActiveItem(null);
+        }
       })
       .catch(err => console.log(err));
   };

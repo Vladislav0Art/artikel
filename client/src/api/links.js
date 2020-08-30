@@ -17,7 +17,21 @@ const postLink = (data) => {
 };
 
 
+// deleting link from db
+const deleteLink = (id) => {
+  return axios.delete(`links/delete-link/${id}`);
+};
+
+
+// updating link in db
+const updateLink = (id, data) => {
+  return axios.put(`links/update-link/${id}`, data);
+};
+
+
 export {
   getLinksByCatId,
-  postLink
+  postLink,
+  deleteLink,
+  updateLink
 };

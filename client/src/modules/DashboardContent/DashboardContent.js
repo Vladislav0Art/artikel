@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // components
 import { LinksList, FormInput, Button } from '../../components';
 // api
-import { getLinksByCatId, postLink } from '../../api/links';
+import { getLinksByCatId, postLink, deleteLink, updateLink } from '../../api/links';
 // styles
 import './DashboardContent.scss';
 import './DashboardContent-media.scss';
@@ -20,12 +20,14 @@ const DashboardContent = ({ activeItem }) => {
   });
   
 
+
   // getting all links by category id
   React.useEffect(() => {
     if(activeItem) {
       getLinksByCatId(activeItem._id)
         .then(response => {
-          setLinks(response.data.links);
+          const links = response.data.links;
+          setLinks(() => links.map( link => ({ ...link, isEditing: false }) ));
         })
         .catch(err => console.error(err));
     }
@@ -49,9 +51,9 @@ const DashboardContent = ({ activeItem }) => {
   const createNewLink = () => {
     // data object
     const data = {
-      title: newLink.title, 
-      descr: newLink.descr, 
-      href: newLink.href,
+      title: newLink.title.trim(), 
+      descr: newLink.descr.trim(), 
+      href: newLink.href.trim(),
       catId: activeItem._id
     };
 
@@ -62,7 +64,7 @@ const DashboardContent = ({ activeItem }) => {
         const link = response.data.link;
 
         // updating links in the state
-        setLinks(prevLinks => [...prevLinks, link]);
+        setLinks(prevLinks => [...prevLinks, { ...link, isEditing: false }]);
         // setting the state of a new link to default values
         setNewLink({
           title: '',
@@ -71,8 +73,54 @@ const DashboardContent = ({ activeItem }) => {
         });
       })
       .catch(err => console.error(err));
-
   };
+
+
+
+  // deleting link from db
+  const deleteLinkFromDB = (id) => {
+    deleteLink(id)
+      .then(res => {
+        // deleting link from local component state
+        setLinks(prevLinks => prevLinks.filter(link => link._id !== id));
+      })
+      .catch(err => console.log(err));
+  };
+
+
+
+  // setting editing mode to true of a link matching the passed id
+  const switchOnLinkEditingMode = (id) => {
+    setLinks(prevLinks => prevLinks.map(link => {
+      if(link._id === id) {
+        link.isEditing = true;
+      }
+      else {
+        link.isEditing = false;
+      }
+
+      return link;
+    }));
+  };
+
+
+  // updating link in db
+  const updateLinkInDB = (id, data) => {
+    // updating link in db
+    updateLink(id, data)
+    .then(res => {
+      // setting editing mode to false
+      setLinks(prevLinks =>  prevLinks.map(link => {
+        if(link._id === id) {
+          link.isEditing = false;
+        }
+
+        return link;
+      }));
+    })
+    .catch(err => console.log(err));
+  };
+  
 
 
   return (
@@ -85,6 +133,9 @@ const DashboardContent = ({ activeItem }) => {
             <LinksList
               classNames={['articles__content-linksList']}
               links={links}
+              deleteLink={deleteLinkFromDB}
+              updateLink={updateLinkInDB}
+              switchMode={switchOnLinkEditingMode}
             />
 
             <div className="articles__content-createBlock">
@@ -111,7 +162,7 @@ const DashboardContent = ({ activeItem }) => {
                 <FormInput 
                   name="href"
                   type="text"
-                  placeholder="Type a link to a resource"
+                  placeholder="For example, https://example.com/"
                   onChange={handleInput}
                   value={newLink.href}
                   label="Link to a resource:"

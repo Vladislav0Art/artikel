@@ -1,15 +1,35 @@
 @import '../../../../styles/colors.scss';
 
 .linksListItem {
-  font-family: 'Montserrat';
   padding: 25px 20px;
-  border-radius: 10px;
   box-sizing: border-box;
+  border-radius: 10px;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__left {
+    font-family: 'Montserrat';
+    margin-right: 15px;
+  }
+
+  &__right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 10px;
+  }
 
   &__title {
     font-size: 20px;
     font-family: inherit;
+    max-width: 400px;
+    width: 100%;
+    overflow-x: auto;
   }
 
   &__descr {
@@ -18,6 +38,8 @@
     font-family: inherit;
     font-size: 14px;
     color: $text-color;
+    max-width: 400px;
+    overflow-x: auto;
   }
 
   &__link {
@@ -41,4 +63,46 @@
       border-color: $action-color;
     }
   }
+
+  &__btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    i {
+      font-size: 15px;
+      color: $icon-dark-gray;
+      transition: 0.2s;
+    }
+
+    &-delete {
+      i:hover, i:focus {
+        color: $icon-coral;
+      }
+    }
+
+    &-update {
+      i:hover, i:focus {
+        color: $action-color;
+      }
+    }
+
+  }
+
+  &__inputContainer {
+    display: grid;
+    align-items: flex-start;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: minmax(auto, 400px);
+    gap: 5px 0;
+  }
+
+  &__inputBlock {
+    width: auto;
+
+    label {
+      display: none;
+    }
+  }
+
 }

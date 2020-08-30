@@ -1,0 +1,32 @@
+@media all and (max-width: 576px) {
+  .linksListItem {
+    &__title {
+      font-size: 16px;
+      max-width: 240px;
+    }
+
+    &__descr {
+      font-size: 14px;
+      max-width: 240px;
+    }
+
+    &__content {
+      flex-direction: column;
+    }
+
+    &__left {
+      margin-right: 0;
+      margin-bottom: 30px;
+    }
+
+    &__right {
+      gap: 0 12px;
+    }
+
+    &__btn {
+      i {
+        font-size: 18px;
+      }
+    }
+  }
+}

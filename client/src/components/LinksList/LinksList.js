@@ -10,7 +10,10 @@ import './LinksList.scss';
 
 const LinksList = ({ 
   classNames,
-  links
+  links,
+  deleteLink,
+  updateLink,
+  switchMode
  }) => {
   return (
     <div className={ClassNames('linksList', classNames)}>
@@ -25,6 +28,10 @@ const LinksList = ({
                 descr={link.descr}
                 title={link.title}
                 href={link.href}
+                isEditing={link.isEditing}
+                deleteLink={deleteLink}
+                updateLink={updateLink}
+                switchMode={switchMode}
               />
             ))
           }
@@ -39,7 +46,10 @@ const LinksList = ({
 
 LinksList.propTypes = {
   classNames: PropTypes.array,
-  links: PropTypes.array.isRequired
+  links: PropTypes.array.isRequired,
+  deleteLink:PropTypes.func.isRequired,
+  updateLink: PropTypes.func.isRequired,
+  switchMode: PropTypes.func.isRequired
 };
 
 
